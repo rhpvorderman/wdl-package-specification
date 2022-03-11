@@ -74,15 +74,21 @@ be listed in the manifest.
 
 ### WDL Files
 
-Any WDL file can be packaged. Preferably these WDL files have either:
+#### Reproducibility of imports
 
-- no imports
-- file imports that reference other files in the package
-- versioned package imports referring a wdl package repository
+In order to ensure reproducibility `import` statements in the WDL
+files must be able to guarantee that always the exact same file is imported.
 
-In the case of http imports the packaging utility must choose one of the 
+This is the case for:
+- File imports that reference other files in the package.
+- Versioned package imports from a WDL package repository. 
+
+In any other case the packaging utility must choose one of the 
 following actions:
 
-- Download the http imports, include them in the package file and rewrite the
-  import statements.
-- Fail with an error message.
+- Fail with an error message
+- Retrieve the import as it is now and include it in the package, rewriting
+  the import statement in the importing file to refer to the included file. 
+  This option may only be chosen after explicit user consent. (For example 
+  by prompt or a command line flag.)
+

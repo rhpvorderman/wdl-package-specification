@@ -66,7 +66,8 @@ additional_files | Array[String] | no | Additional files shipped in the package,
 #### Version
 
 The version must follow the [Semantic Versioning version 2 specification](
-https://semver.org/spec/v2.0.0.html). 
+https://semver.org/spec/v2.0.0.html). Package repositories must reject
+packages that do not have a semantic version number.
 
 Package repositories may only allow one of each name and version combination.
 An exception is made for versions with the `-SNAPSHOT` prerelease version. These

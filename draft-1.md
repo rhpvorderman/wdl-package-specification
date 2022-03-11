@@ -47,4 +47,42 @@ and extensions must not be supported.
 
 ## Contents
 
-### MANIFEST.JSON
+### The manifest
+
+Each WDL Package file must contain a file called `MANIFEST.json` at the root
+level of the archive directory. Hereafter called "the manifest".  The manifest
+contains a single dictionary with the following fields:
+
+Field name | field type | required | Description
+---|---|---|---
+wdl_package_spec_version | String | yes | The version of the WDL package specification that this package adhers too.
+version | String | yes | The version of the packaged WDL contents.
+license_file | String | yes | The path in the archive where the license for the package contents is stored.
+license_id | String | yes | A [SPDX License identifier](https://spdx.org/licenses/). In case the License does not have a SPDX identifier this field must be present too and set to NULL.
+main_workflow_url | String | no | The main workflow URL when the wdl package contains a workflow. Not required since packages can also be used to distribute tasks.
+additional_files | Array[String] | no | Additional files shipped in the package, such as READMEs, examples, settings files etc.
+
+### License file
+
+A License file is required to let users know what they can and cannot do with
+the contents of the package. The filename is not fixed, but the path must be 
+specified in the manifest.
+
+### Additional files
+Non-WDL files may also be shipped with the package. All additional files must 
+be listed in the manifest.
+
+### WDL Files
+
+Any WDL file can be packaged. Preferably these WDL files have either:
+
+- no imports
+- file imports that reference other files in the package
+- versioned package imports referring a wdl package repository
+
+In the case of http imports the packaging utility must choose one of the 
+following actions:
+
+- Download the http imports, include them in the package file and rewrite the
+  import statements.
+- Fail with an error message.

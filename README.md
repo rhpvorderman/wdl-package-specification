@@ -73,6 +73,11 @@ Package repositories may only allow one of each name and version combination.
 An exception is made for versions with the `-SNAPSHOT` prerelease version. These
 may override earlier versions.
 
+#### Filenames
+
+Filenames such as in `license_file`, `main_workflow_url` and `additional_files`
+must use the UNIX-style forward slash (`/`) as a directory separator.  
+
 ### License file
 
 A License file is required to let users know what they can and cannot do with

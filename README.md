@@ -56,11 +56,21 @@ contains a single dictionary with the following fields:
 Field name | field type | required | Description
 ---|---|---|---
 wdl_package_spec_version | String | yes | The version of the WDL package specification that this package adhers too.
+name | String | yes | The name of this package. 
 version | String | yes | The version of the packaged WDL contents.
 license_file | String | yes | The path in the archive where the license for the package contents is stored.
 license_id | String | yes | A [SPDX License identifier](https://spdx.org/licenses/). In case the License does not have a SPDX identifier this field must be present too and set to NULL.
 main_workflow_url | String | no | The main workflow URL when the wdl package contains a workflow. Not required since packages can also be used to distribute tasks.
 additional_files | Array[String] | no | Additional files shipped in the package, such as READMEs, examples, settings files etc.
+
+#### Version
+
+The version must follow the [Semantic Versioning version 2 specification](
+https://semver.org/spec/v2.0.0.html). 
+
+Package repositories may only allow one of each name and version combination.
+An exception is made for versions with the `-SNAPSHOT` prerelease version. These
+may override earlier versions.
 
 ### License file
 
